@@ -9,7 +9,7 @@ class Collection extends Resource
     /**
      * @var array|Item[]
      */
-    protected $items = [];
+    public $items = [];
 
     /**
      * Collection constructor.
