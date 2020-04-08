@@ -44,15 +44,16 @@ class Flarum
 
     /**
      * Flarum constructor.
-     * @param $host Full FQDN hostname to your Flarum forum, eg http://example.com/forum
+     * @param string $host Full FQDN hostname to your Flarum forum, eg http://example.com/forum
      * @param array $authorization Holding either "token" or "username" and "password" as keys.
+     * @param array $options Custom options for the Guzzle HTTP Client
      */
-    public function __construct($host, array $authorization = [])
+    public function __construct($host, array $authorization = [], array $options = [])
     {
-        $this->rest = new Guzzle([
+        $this->rest = new Guzzle(array_merge([
             'base_uri' => "$host/api/",
             'headers' => $this->requestHeaders($authorization)
-        ]);
+        ], $options));
 
         $this->fluent = new Fluent($this);
 
