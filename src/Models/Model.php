@@ -4,15 +4,15 @@ namespace Maicol07\Flarum\Api\Models;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Maicol07\Flarum\Api\Client;
 use Maicol07\Flarum\Api\Exceptions\InvalidArgumentException;
-use Maicol07\Flarum\Api\Flarum;
 use Maicol07\Flarum\Api\Fluent;
 use Maicol07\Flarum\Api\Resource\Item;
 
 abstract class Model
 {
     /**
-     * @var Flarum
+     * @var Client
      */
     protected static $dispatcher;
     /**
@@ -49,19 +49,19 @@ abstract class Model
 
         throw new InvalidArgumentException("Resource type {$item->type} could not be migrated to Model");
     }
-
+    
     /**
-     * @param Flarum $dispatcher
+     * @param Client $dispatcher
      */
-    public static function setDispatcher(Flarum $dispatcher)
+    public static function setDispatcher(Client $dispatcher)
     {
         self::$dispatcher = $dispatcher;
     }
-
+    
     /**
-     * @return Flarum
+     * @return Client
      */
-    public static function getDispatcher(): Flarum
+    public static function getDispatcher(): Client
     {
         return self::$dispatcher;
     }

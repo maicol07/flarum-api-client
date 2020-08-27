@@ -2,7 +2,7 @@
 
 namespace Maicol07\Flarum\Api\Tests;
 
-use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Client;
 use Maicol07\Flarum\Api\Models\Discussion;
 use Maicol07\Flarum\Api\Models\Model;
 use Maicol07\Flarum\Api\Resource\Collection;
@@ -40,8 +40,8 @@ class DiscussionTest extends TestCase
 
         $this->assertEquals($discussion->id, $item->id, 'Requesting an existing discussion retrieves an incorrect result.');
         $this->assertEquals($discussion->type, $item->type, 'Requesting an existing discussion retrieves an incorrect resource type.');
-
-        $cached = Flarum::getCache()->get($discussion->id, null, $discussion->type);
+    
+        $cached = Client::getCache()->get($discussion->id, null, $discussion->type);
 
         $this->assertNotNull($cached, 'Discussion was not automatically persisted to global store.');
         $this->assertEquals($discussion->id, $cached->id, 'The wrong discussion was stored into cache.');

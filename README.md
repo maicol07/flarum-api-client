@@ -29,9 +29,9 @@ A basic example:
 
 require_once "vendor/autoload.php";
 
-use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Client;
 
-$api = new Flarum('http://example.com');
+$api = new Client('http://example.com');
 
 // A collection of discussions from the first page of your Forum index.
 $discussions = $api->discussions()->request();

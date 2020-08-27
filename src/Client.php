@@ -9,11 +9,11 @@ use Maicol07\Flarum\Api\Response\Factory;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class Flarum
- * @package Maicol07\Flarum\Api
+ * Class Client
+ * @package Maicol07\Client\Api
  * @mixin Fluent
  */
-class Flarum
+class Client
 {
     /* @var Cache */
     protected static $cache;
@@ -27,8 +27,8 @@ class Flarum
     protected $strict = true;
     
     /**
-     * Flarum constructor.
-     * @param string $host Full FQDN hostname to your Flarum forum, eg http://example.com/forum
+     * Client constructor.
+     * @param string $host Full FQDN hostname to your Client forum, eg http://example.com/forum
      * @param array $authorization Holding either "token" or "username" and "password" as keys.
      * @param array $options Custom options for the Guzzle HTTP Client
      */
@@ -48,7 +48,7 @@ class Flarum
     {
         $headers = [
             'Accept' => 'application/vnd.api+json, application/json',
-            'User-Agent' => 'Maicol07 Flarum Api Client'
+            'User-Agent' => 'Maicol07 Client Api Client'
         ];
         
         $token = Arr::get($authorization, 'token');
@@ -122,7 +122,7 @@ class Flarum
         return $this->strict;
     }
     
-    public function setStrict(bool $strict): Flarum
+    public function setStrict(bool $strict): Client
     {
         $this->strict = $strict;
         return $this;

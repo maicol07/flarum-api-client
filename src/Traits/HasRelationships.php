@@ -3,7 +3,7 @@
 namespace Maicol07\Flarum\Api\Traits;
 
 use Illuminate\Support\Arr;
-use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Client;
 use Maicol07\Flarum\Api\Resource\Item;
 
 trait HasRelationships
@@ -50,6 +50,6 @@ trait HasRelationships
      */
     protected function parseRelationshipItem(string $type, int $id)
     {
-        return Flarum::getCache()->get($id, null, $type);
+        return Client::getCache()->get($id, null, $type);
     }
 }

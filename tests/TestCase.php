@@ -2,13 +2,13 @@
 
 namespace Maicol07\Flarum\Api\Tests;
 
-use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Client;
 use Maicol07\Flarum\Api\Models\Model;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var Flarum
+     * @var Client
      */
     protected $flarum;
     
@@ -17,8 +17,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         parent::setUp();
         
         $token = getenv('FLARUM_TOKEN');
-        
-        $this->flarum = new Flarum(
+    
+        $this->flarum = new Client(
             getenv('FLARUM_HOST') ?? 'https://discuss.flarum.org',
             $token ? compact('token') : []
         );

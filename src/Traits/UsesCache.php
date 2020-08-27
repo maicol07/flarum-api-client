@@ -2,7 +2,7 @@
 
 namespace Maicol07\Flarum\Api\Traits;
 
-use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Client;
 use Maicol07\Flarum\Api\Resource\Item;
 
 trait UsesCache
@@ -12,7 +12,7 @@ trait UsesCache
      */
     public function cache()
     {
-        Flarum::getCache()->set($this->id, $this, $this->type);
+        Client::getCache()->set($this->id, $this, $this->type);
 
         return $this;
     }

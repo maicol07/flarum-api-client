@@ -7,7 +7,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
 
 /**
  * Class Fluent
- * @package Maicol07\Flarum\Api
+ * @package Maicol07\Client\Api
  *
  * @method Fluent discussions(string|int|null $id = null)
  * @method Fluent groups(string|int|null $id = null)
@@ -58,7 +58,7 @@ class Fluent
     /* @var array */
     protected $includes = [];
     
-    /* @var Flarum */
+    /* @var Client */
     protected $flarum;
     
     /* @var string */
@@ -66,8 +66,8 @@ class Fluent
     
     /* @var array */
     protected $variables = [];
-
-    public function __construct(Flarum $flarum)
+    
+    public function __construct(Client $flarum)
     {
         $this->flarum = $flarum;
     }
