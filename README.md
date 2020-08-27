@@ -44,7 +44,13 @@ $users = $api->users()->request();
 An authorized example:
 
 ```php
-$api = Flarum('http://example.com', ['token' => '<insert-master-token>; userId=1']);
+<?php
+
+require_once "vendor/autoload.php";
+
+use Maicol07\Flarum\Api\Client;
+
+$api = new Client('http://example.com', ['token' => '<insert-master-token>; userId=1']);
 ```
 
 > The userId refers to a user that has admin permissions or the user you want to run actions for. Appending the userId setting to the token only works for Master keys.

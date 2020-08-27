@@ -2,7 +2,6 @@
 
 namespace Maicol07\Flarum\Api;
 
-use GuzzleHttp\Client as Guzzle;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Support\Arr;
 use Maicol07\Flarum\Api\Response\Factory;
@@ -17,8 +16,8 @@ class Client
 {
     /* @var Cache */
     protected static $cache;
-    /* @var Guzzle */
-    protected $rest;
+    /* @var \GuzzleHttp\Client */
+    protected $client;
     /* @var Fluent */
     protected $fluent;
     /* @var bool Whether to enforce specific markup/variables setting. */
@@ -28,27 +27,33 @@ class Client
     
     /**
      * Client constructor.
-     * @param string $host Full FQDN hostname to your Client forum, eg http://example.com/forum
+     * @param string $host Full FQDN hostname to your Flarum forum, eg http://example.com/forum
      * @param array $authorization Holding either "token" or "username" and "password" as keys.
-     * @param array $options Custom options for the Guzzle HTTP Client
+     * @param array $options Custom options for the HTTP Client
      */
-    public function __construct($host, array $authorization = [], array $options = [])
+    public function __construct(string $host, array $authorization = [], array $options = [])
     {
-        $this->rest = new Guzzle(array_merge([
+        $this->client = new \GuzzleHttp\Client(array_merge([
             'base_uri' => "$host/api/",
-            'headers' => $this->requestHeaders($authorization)
+            'headers' => $this->getHeaders($authorization)
         ], $options));
-    
+        
         $this->fluent = new Fluent($this);
-    
+        
         static::$cache = new Cache(new ArrayStore);
     }
     
-    protected function requestHeaders(array $authorization = []): array
+    /**
+     * Get request headers
+     *
+     * @param array $authorization
+     * @return string[]
+     */
+    protected function getHeaders(array $authorization = []): array
     {
         $headers = [
             'Accept' => 'application/vnd.api+json, application/json',
-            'User-Agent' => 'Maicol07 Client Api Client'
+            'User-Agent' => 'Maicol07 Flarum Api Client'
         ];
         
         $token = Arr::get($authorization, 'token');
@@ -61,6 +66,11 @@ class Client
         return $headers;
     }
     
+    /**
+     * Get the cache object
+     *
+     * @return Cache
+     */
     public static function getCache(): Cache
     {
         return self::$cache;
@@ -73,7 +83,7 @@ class Client
 
         /** @var ResponseInterface $response */
         try {
-            $response = $this->rest->{$method}((string)$this->fluent, $this->getVariablesForMethod());
+            $response = $this->client->{$method}((string)$this->fluent, $this->getVariablesForMethod());
         } finally {
             // Reset the fluent builder for a new request.
             $this->fluent->reset();
@@ -112,10 +122,11 @@ class Client
         return $this->fluent;
     }
     
-    public function getRest(): Guzzle
+    public function getClient(): \GuzzleHttp\Client
     {
-        return $this->rest;
+        return $this->client;
     }
+    
     
     public function isStrict(): bool
     {
@@ -128,6 +139,11 @@ class Client
         return $this;
     }
     
+    /**.
+     * User is authorized if an authorization header with the token exists
+     *
+     * @return bool
+     */
     public function isAuthorized(): bool
     {
         return $this->authorized;
