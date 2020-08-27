@@ -53,5 +53,4 @@ $api = Flarum('http://example.com', ['token' => '<insert-master-token>; userId=1
 
 - [Github](https://github.com/maicol07/flarum-api-client)
 - [Packagist](http://packagist.com/packages/maicol07/flarum-api-client)
-- [Issues](https://github.com/maicol07/flarum-api-client/issues)
-- [Changelog](https://github.com/maicol07/flarum-api-client/changelog.md)
+- [Issues](https://bugs.maicol07.it/projects/74d531ee-75e4-463f-9cfd-e81a152dbc92)
