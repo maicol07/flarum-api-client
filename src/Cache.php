@@ -1,9 +1,9 @@
 <?php
 
-namespace Flagrow\Flarum\Api;
+namespace Maicol07\Flarum\Api;
 
-use Flagrow\Flarum\Api\Resource\Item;
 use Illuminate\Contracts\Cache\Store;
+use Maicol07\Flarum\Api\Resource\Item;
 
 class Cache
 {

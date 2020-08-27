@@ -1,19 +1,20 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Resource;
+namespace Maicol07\Flarum\Api\Resource;
 
-use Flagrow\Flarum\Api\Traits\HasRelationships;
-use Flagrow\Flarum\Api\Traits\UsesCache;
 use Illuminate\Support\Arr;
+use Maicol07\Flarum\Api\Traits\HasRelationships;
+use Maicol07\Flarum\Api\Traits\UsesCache;
 
 class Item extends Resource
 {
     use HasRelationships, UsesCache;
+    
     /**
      * @var string
      */
     public $type;
-
+    
     /**
      * @var int
      */

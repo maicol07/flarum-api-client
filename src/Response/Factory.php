@@ -1,10 +1,10 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Response;
+namespace Maicol07\Flarum\Api\Response;
 
-use Flagrow\Flarum\Api\Resource\Collection;
-use Flagrow\Flarum\Api\Resource\Item;
 use Illuminate\Support\Arr;
+use Maicol07\Flarum\Api\Resource\Collection;
+use Maicol07\Flarum\Api\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 
 class Factory

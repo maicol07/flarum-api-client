@@ -1,5 +1,7 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Exceptions;
+namespace Maicol07\Flarum\Api\Exceptions;
 
-class InvalidArgumentException extends \InvalidArgumentException {}
+class InvalidArgumentException extends \InvalidArgumentException
+{
+}

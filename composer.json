@@ -1,9 +1,20 @@
 {
-    "name": "flagrow/flarum-api-client",
+    "name": "maicol07/flarum-api-client",
     "description": "Standalone package for calling the API of a Flarum installation.",
-    "keywords": ["api", "flarum", "flagrow"],
+    "keywords": [
+        "api",
+        "flarum",
+        "flagrow",
+        "maicol07",
+        "client"
+    ],
     "license": "MIT",
     "authors": [
+        {
+            "name": "Maicol Battistini",
+            "email": "maicolbattistini@live.it",
+            "homepage": "https://maicol07.it"
+        },
         {
             "name": "Daniël Klabbers",
             "email": "daniel+flarum@klabbers.email",
@@ -11,8 +22,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/flagrow/flarum-api-client/issues",
-        "source": "https://github.com/flagrow/flarum-api-client"
+        "issues": "https://github.com/maicol07/flarum-api-client/issues",
+        "source": "https://github.com/maicol07/flarum-api-client"
     },
     "require": {
         "php": ">=7.2",
@@ -31,12 +42,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Flagrow\\Flarum\\Api\\": "src/"
+            "Maicol07\\Flarum\\Api\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Flagrow\\Flarum\\Api\\Tests\\": "tests"
+            "Maicol07\\Flarum\\Api\\Tests\\": "tests"
         }
     }
 }

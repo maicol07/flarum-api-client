@@ -1,16 +1,17 @@
-# flarum-api-client by ![flagrow logo](https://avatars0.githubusercontent.com/u/16413865?v=3&s=15) [flagrow](https://discuss.flarum.org/d/1832-flagrow-extension-developer-group)
+# Flarum Api Client
 
-[![Latest Stable Version](https://poser.pugx.org/flagrow/flarum-api-client/v/stable)](https://packagist.org/packages/flagrow/flarum-api-client) [![Gitter](https://badges.gitter.im/flagrow/flarum-api-client.svg)](https://gitter.im/flagrow/chat)
+[![Latest Stable Version](https://poser.pugx.org/maicol07/flarum-api-client/v/stable)](https://packagist.org/packages/maicol07/flarum-api-client)
 
 This is a generic PHP API client for use in any project. You can simply include this package as a dependency to your project to use it.
 
-### installation
+### Installation
 
+The only supported installation method is via composer:
 ```bash
-composer require flagrow/flarum-api-client
+composer require maicol07/flarum-api-client
 ```
 
-### configuration
+### Configuration
 
 In order to start working with the client you might need a Flarum master key:
 
@@ -20,7 +21,7 @@ In order to start working with the client you might need a Flarum master key:
 The master key is required to access non-public discussions and running actions otherwise reserved for
 Flarum administrators.
 
-### examples
+### Examples
 
 A basic example:
 
@@ -29,7 +30,7 @@ A basic example:
 
 require_once "vendor/autoload.php";
 
-use Flagrow\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Flarum;
 
 $api = new Flarum('http://example.com');
 
@@ -49,11 +50,9 @@ $api = Flarum('http://example.com', ['token' => '<insert-master-token>; userId=1
 
 > The userId refers to a user that has admin permissions or the user you want to run actions for. Appending the userId setting to the token only works for Master keys.
 
-### links
+### Links
 
-- [on github](https://github.com/flagrow/flarum-api-client)
-- [on packagist](http://packagist.com/packages/flagrow/flarum-api-client)
-- [issues](https://github.com/flagrow/flarum-api-client/issues)
-- [changelog](https://github.com/flagrow/flarum-api-client/changelog.md)
-
-> Flagrow is a collaboration of Flarum extension developers to provide quality, maintained extensions.
+- [Github](https://github.com/maicol07/flarum-api-client)
+- [Packagist](http://packagist.com/packages/maicol07/flarum-api-client)
+- [Issues](https://github.com/maicol07/flarum-api-client/issues)
+- [Changelog](https://github.com/maicol07/flarum-api-client/changelog.md)

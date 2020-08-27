@@ -1,28 +1,27 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Tests\Unit;
+namespace Maicol07\Flarum\Api\Tests;
 
-use Flagrow\Flarum\Api\Flarum;
-use Flagrow\Flarum\Api\Models\Discussion;
-use Flagrow\Flarum\Api\Models\Model;
-use Flagrow\Flarum\Api\Resource\Collection;
-use Flagrow\Flarum\Api\Resource\Item;
-use Flagrow\Flarum\Api\Tests\TestCase;
+use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Models\Discussion;
+use Maicol07\Flarum\Api\Models\Model;
+use Maicol07\Flarum\Api\Resource\Collection;
+use Maicol07\Flarum\Api\Resource\Item;
 
 class DiscussionTest extends TestCase
 {
     /**
      * @test
      */
-    public function frontpage()
+    public function frontpage(): Collection
     {
         /** @var Collection $collection */
         $collection = $this->flarum->discussions()->request();
-
-        $this->assertTrue($collection instanceof Collection);
-
+        
+        $this->assertInstanceOf(Collection::class, $collection);
+        
         $this->assertGreaterThan(0, $collection->collect()->count());
-
+        
         return $collection;
     }
 

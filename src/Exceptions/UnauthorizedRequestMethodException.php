@@ -1,7 +1,10 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Exceptions;
+namespace Maicol07\Flarum\Api\Exceptions;
 
-class UnauthorizedRequestMethodException extends \Exception {
+use Exception;
+
+class UnauthorizedRequestMethodException extends Exception
+{
 
 }

@@ -1,17 +1,18 @@
 <?php
 
-namespace Flagrow\Flarum\Api;
+namespace Maicol07\Flarum\Api;
 
-use Flagrow\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
+use Illuminate\Support\Arr;
+use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
 
 /**
  * Class Fluent
- * @package Flagrow\Flarum\Api
+ * @package Maicol07\Flarum\Api
  *
- * @method Fluent discussions(string|int|null $id)
- * @method Fluent groups(string|int|null $id)
- * @method Fluent users(string|int|null $id)
- * @method Fluent tags(string|int|null $id)
+ * @method Fluent discussions(string|int|null $id = null)
+ * @method Fluent groups(string|int|null $id = null)
+ * @method Fluent users(string|int|null $id = null)
+ * @method Fluent tags(string|int|null $id = null)
  *
  * @method Fluent get
  * @method Fluent head
@@ -22,70 +23,56 @@ use Flagrow\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  */
 class Fluent
 {
-    /**
-     * @var array
-     */
+    /* @var array */
     protected $types = [
         'discussions',
         'users',
         'groups',
         'tags'
     ];
-
+    
+    /* @var array */
     protected $methods = [
         'get', 'head',
         'post', 'put', 'patch',
         'delete'
     ];
-
+    
+    /* @var array */
     protected $methodsRequiringAuthorization = [
         'post', 'put', 'patch', 'delete'
     ];
-
-    /**
-     * @var array
-     */
+    
+    /* @var array */
     protected $pagination = [
         'filter',
         'page'
     ];
-
-    /**
-     * @var array
-     */
+    
+    /* @var array */
     protected $segments = [];
-
-    /**
-     * @var array
-     */
+    
+    /* @var array */
     protected $query = [];
-
-    /**
-     * @var array
-     */
+    
+    /* @var array */
     protected $includes = [];
-
-    /**
-     * @var Flarum
-     */
+    
+    /* @var Flarum */
     protected $flarum;
-
-    /**
-     * @var string
-     */
+    
+    /* @var string */
     protected $method = 'get';
-
-    /**
-     * @var array
-     */
+    
+    /* @var array */
     protected $variables = [];
 
     public function __construct(Flarum $flarum)
     {
         $this->flarum = $flarum;
     }
-
-    public function reset()
+    
+    public function reset(): Fluent
     {
         $this->segments = [];
         $this->includes = [];
@@ -122,22 +109,22 @@ class Fluent
     public function setMethod(string $method): Fluent
     {
         $this->method = strtolower($method);
-
+    
         if (
             $this->flarum->isStrict() &&
             !$this->flarum->isAuthorized() &&
-            in_array($this->method, $this->methodsRequiringAuthorization)) {
+            in_array($this->method, $this->methodsRequiringAuthorization, true)) {
             throw new UnauthorizedRequestMethodException($this->method);
         }
 
         return $this;
     }
-
-    public function setVariables(array $variables = [])
+    
+    public function setVariables(array $variables = []): Fluent
     {
         if (isset($variables['relationships'])) {
             foreach ($variables['relationships'] as $relation => $relationship) {
-                if (! array_get($relationship, 'data')) {
+                if (!Arr::get($relationship, 'data')) {
                     unset($variables['relationships'][$relation]);
                     $variables['relationships'][$relation]['data'] = $relationship;
                 }
@@ -162,11 +149,11 @@ class Fluent
     {
         return $this->variables;
     }
-
-    protected function handlePagination(string $type, $value)
+    
+    protected function handlePagination(string $type, $value): Fluent
     {
         $this->query[$type] = $value;
-
+        
         return $this;
     }
 
@@ -188,18 +175,15 @@ class Fluent
     {
         return $this->handlePagination('page[offset]', $number);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    function __toString()
+    
+    public function __toString()
     {
         $path = implode('/', $this->segments);
-
+        
         if ($this->includes || $this->query) {
             $path .= '?';
         }
-
+        
         if ($this->includes) {
             $path .= sprintf(
                 'include=%s&',
@@ -213,29 +197,31 @@ class Fluent
 
         return $path;
     }
-
+    
     /**
      * @param $name
      * @param $arguments
      * @return Fluent
+     * @throws UnauthorizedRequestMethodException
+     * @noinspection PhpInconsistentReturnPointsInspection
      */
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
-        if (in_array($name, $this->methods)) {
+        if (in_array($name, $this->methods, true)) {
             if (!empty($arguments)) {
                 $this->setVariables($arguments);
             }
-            return $this->setMethod($name, $arguments);
+            return $this->setMethod($name);
         }
-
-        if (count($arguments) <= 1 && in_array($name, $this->types)) {
+        
+        if (count($arguments) <= 1 && in_array($name, $this->types, true)) {
             return $this->handleType($name, $arguments[0] ?? null);
         }
-
-        if (in_array($name, $this->pagination) && count($arguments) === 1) {
-            return call_user_func_array([$this, 'handlePagination'], array_prepend($arguments, $name));
+        
+        if (in_array($name, $this->pagination, true) && count($arguments) === 1) {
+            return call_user_func_array([$this, 'handlePagination'], Arr::prepend($arguments, $name));
         }
-
+        
         if (method_exists($this->flarum, $name)) {
             return call_user_func_array([$this->flarum, $name], $arguments);
         }

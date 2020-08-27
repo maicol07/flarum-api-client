@@ -1,13 +1,13 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Models;
+namespace Maicol07\Flarum\Api\Models;
 
-use Flagrow\Flarum\Api\Exceptions\InvalidArgumentException;
-use Flagrow\Flarum\Api\Flarum;
-use Flagrow\Flarum\Api\Fluent;
-use Flagrow\Flarum\Api\Resource\Item;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Maicol07\Flarum\Api\Exceptions\InvalidArgumentException;
+use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Fluent;
+use Maicol07\Flarum\Api\Resource\Item;
 
 abstract class Model
 {

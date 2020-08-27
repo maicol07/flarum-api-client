@@ -1,6 +1,6 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Resource;
+namespace Maicol07\Flarum\Api\Resource;
 
 use Illuminate\Support\Collection as Collect;
 

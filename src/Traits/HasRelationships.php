@@ -1,15 +1,15 @@
 <?php
 
-namespace Flagrow\Flarum\Api\Traits;
+namespace Maicol07\Flarum\Api\Traits;
 
-use Flagrow\Flarum\Api\Flarum;
-use Flagrow\Flarum\Api\Resource\Item;
 use Illuminate\Support\Arr;
+use Maicol07\Flarum\Api\Flarum;
+use Maicol07\Flarum\Api\Resource\Item;
 
 trait HasRelationships
 {
-
-
+    
+    
     /**
      * @var array
      */
