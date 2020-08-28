@@ -76,11 +76,16 @@ class Client
         return self::$cache;
     }
     
-    /** @noinspection PhpInconsistentReturnPointsInspection */
+    /**
+     * Request to Flarum the specified resource
+     *
+     * @return bool|Resource\Collection|Resource\Item|null
+     * @noinspection PhpInconsistentReturnPointsInspection
+     */
     public function request()
     {
         $method = $this->fluent->getMethod();
-
+        
         /** @var ResponseInterface $response */
         try {
             $response = $this->client->{$method}((string)$this->fluent, $this->getVariablesForMethod());

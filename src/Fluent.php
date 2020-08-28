@@ -20,6 +20,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @method Fluent put(array $variables = [])
  * @method Fluent patch(array $variables = [])
  * @method Fluent delete
+ * @method bool|Resource\Collection|Resource\Item|null request()
  */
 class Fluent
 {
