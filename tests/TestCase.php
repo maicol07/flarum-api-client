@@ -10,7 +10,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @var Client
      */
-    protected $flarum;
+    protected $client;
     
     protected function setUp(): void
     {
@@ -18,11 +18,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         
         $token = getenv('FLARUM_TOKEN');
     
-        $this->flarum = new Client(
+        $this->client = new Client(
             getenv('FLARUM_HOST') ?? 'https://discuss.flarum.org',
-            $token ? compact('token') : []
+            $token ? compact('token') : [],
+            env('DEBUG') ? ['debug' => true] : []
         );
-
-        Model::setDispatcher($this->flarum);
+    
+        Model::setDispatcher($this->client);
     }
 }
