@@ -54,7 +54,6 @@ class Fluent
     
     /* @var array */
     protected $pagination = [
-        'filter',
         'page'
     ];
     
@@ -164,7 +163,7 @@ class Fluent
         return $this->variables;
     }
     
-    protected function handlePagination(string $type, $value): Fluent
+    protected function addQueryParameter(string $type, $value): Fluent
     {
         $this->query[$type] = $value;
         
@@ -184,10 +183,30 @@ class Fluent
 
         return $this;
     }
-
+    
+    /**
+     * Set the page offset of the current GET request
+     *
+     * @param int $number
+     * @return Fluent
+     */
     public function offset(int $number): Fluent
     {
-        return $this->handlePagination('page[offset]', $number);
+        return $this->addQueryParameter('page[offset]', $number);
+    }
+    
+    /**
+     * Add a filter to the current GET request
+     *
+     * @param array $filters
+     * @return Fluent
+     */
+    public function filter(array $filters = []): Fluent
+    {
+        foreach ($filters as $filter => $value) {
+            $this->addQueryParameter("filter[$filter]", $value);
+        }
+        return $this;
     }
     
     public function __toString()
@@ -233,7 +252,7 @@ class Fluent
         }
     
         if (in_array($name, $this->pagination, true) && count($arguments) === 1) {
-            return call_user_func_array([$this, 'handlePagination'], Arr::prepend($arguments, $name));
+            return call_user_func_array([$this, 'addQueryParameter'], Arr::prepend($arguments, $name));
         }
     
         if (method_exists($this->client, $name)) {

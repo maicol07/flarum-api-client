@@ -12,19 +12,31 @@ class DiscussionTest extends TestCase
 {
     /**
      * @test
+     * @param array $filters
+     * @return Collection
      */
-    public function frontpage(): Collection
+    public function frontpage($filters = []): Collection
     {
         /** @var Collection $collection */
-        $collection = $this->client->discussions()->request();
-    
+        $collection = $this->client->discussions()->filter($filters)->request();
+        
         self::assertInstanceOf(Collection::class, $collection);
-    
+        
         self::assertGreaterThan(0, $collection->collect()->count());
         
         return $collection;
     }
-
+    
+    /**
+     * @test
+     */
+    public function filter(): void
+    {
+        $this->frontpage([
+            'q' => env('DISCUSSION_FILTER') ?? 'tag:sandbox'
+        ]);
+    }
+    
     /**
      * @test
      * @depends frontpage
