@@ -15,14 +15,14 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @method Fluent users(string|int|null $id = null) Set the users endpoint and optionally filter the results providing a user ID
  * @method Fluent tags(string|int|null $id = null) Set the tags endpoint and optionally filter the results providing a tag ID
  *
+ * @method Fluent get() Set the GET request method
+ * @method Fluent head() Set the HEAD request method
+ * @method Fluent post(array $variables = []) Set the POST request method and optionally send a JSON body, written as an array
+ * @method Fluent put(array $variables = []) Set the PUT request method and optionally send a JSON body, written as an array
+ * @method Fluent patch(array $variables = []) Set the PATCH request method and optionally send a JSON body, written as an array
+ * @method Fluent delete() Set the DELETE request method and optionally send a JSON body, written as an array
  *
- * @method Fluent get
- * @method Fluent head
- * @method Fluent post(array $variables = [])
- * @method Fluent put(array $variables = [])
- * @method Fluent patch(array $variables = [])
- * @method Fluent delete
- * @method bool|Resource\Collection|Resource\Item|null|Resource\Token request() If called alone, it returns Flarum info
+ * @method bool|Resource\Collection|Resource\Item|null|Resource\Token request() Execute the request. If called without any endpoint and / or methods ( or GET), it returns Flarum info
  */
 class Fluent
 {
