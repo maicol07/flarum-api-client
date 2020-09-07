@@ -9,11 +9,11 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * Class Fluent
  * @package Maicol07\Client\Api
  *
- * @method Fluent token() Get user token
- * @method Fluent discussions(string|int|null $id = null) Get discussions or only one if you provide an ID
- * @method Fluent groups(string|int|null $id = null) Get groups or only one if you provide an ID
- * @method Fluent users(string|int|null $id = null) Get users or only one if you provide an ID
- * @method Fluent tags(string|int|null $id = null) Get tags or only one if you provide an ID
+ * @method Fluent token() Set the token endpoint
+ * @method Fluent discussions(string|int|null $id = null) Set the discussions endpoint and optionally filter the results providing a discussion ID
+ * @method Fluent groups(string|int|null $id = null) Set the groups endpoint and optionally filter the results providing a group ID
+ * @method Fluent users(string|int|null $id = null) Set the users endpoint and optionally filter the results providing a user ID
+ * @method Fluent tags(string|int|null $id = null) Set the tags endpoint and optionally filter the results providing a tag ID
  *
  *
  * @method Fluent get
@@ -28,11 +28,11 @@ class Fluent
 {
     /* @var array */
     protected $types = [
+        'token',
         'discussions',
         'users',
         'groups',
         'tags',
-        'token'
     ];
     
     /* @var array */
