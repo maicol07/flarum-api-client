@@ -609,20 +609,16 @@ td.phpdocumentor-cell:last-child {
     display: inline-block;
     text-decoration: none;
 }
-
 .phpdocumentor-top-header a span {
     border-bottom: 1px solid transparent;
     transition: border-bottom-color .2s ease-in-out;
 }
-
 .phpdocumentor-top-header a:hover {
     color: var(--text-color);
 }
-
 .phpdocumentor-top-header a:hover span {
     border-bottom: 1px solid var(--text-color);
 }
-
 .phpdocumentor-top-header a:not(:first-of-type):before {
     display: inline-block;
     color: #ccc;
@@ -658,7 +654,6 @@ td.phpdocumentor-cell:last-child {
     line-height: 1.2;
     text-shadow: 0 0 2px var(--title-text-shadow-color);
 }
-
 .phpdocumentor-title small {
     text-shadow: none;
     font-size: var(--text-xxs);
@@ -797,7 +792,6 @@ td.phpdocumentor-cell:last-child {
     color: var(--primary-color-darker);
     display: block;
 }
-
 .phpdocumentor-search-results__entry h3 {
     margin: 0;
 }
@@ -808,7 +802,6 @@ td.phpdocumentor-cell:last-child {
     opacity: .3; /** white-out default for loading indication */
     transition: opacity .3s, background .3s;
 }
-
 .phpdocumentor-search:before {
     content: '';
     background: transparent;
@@ -828,7 +821,6 @@ td.phpdocumentor-cell:last-child {
 .phpdocumentor-search--active {
     opacity: 1;
 }
-
 .phpdocumentor-search--has-results:before {
     background: var(--popover-background-color);
     opacity: 1;
