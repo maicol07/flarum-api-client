@@ -19,7 +19,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $token = getenv('FLARUM_TOKEN');
     
         $this->client = new Client(
-            getenv('FLARUM_HOST') ?? 'https://discuss.flarum.org',
+            empty(getenv('FLARUM_HOST')) ? 'https://discuss.flarum.org' : getenv('FLARUM_HOST'),
             $token ? compact('token') : [],
             env('DEBUG') ? ['debug' => true] : []
         );
