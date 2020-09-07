@@ -13,6 +13,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @method Fluent groups(string|int|null $id = null)
  * @method Fluent users(string|int|null $id = null)
  * @method Fluent tags(string|int|null $id = null)
+ * @method Fluent token()
  *
  * @method Fluent get
  * @method Fluent head
@@ -20,7 +21,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @method Fluent put(array $variables = [])
  * @method Fluent patch(array $variables = [])
  * @method Fluent delete
- * @method bool|Resource\Collection|Resource\Item|null request()
+ * @method bool|Resource\Collection|Resource\Item|null|Resource\Token request()
  */
 class Fluent
 {
@@ -29,7 +30,8 @@ class Fluent
         'discussions',
         'users',
         'groups',
-        'tags'
+        'tags',
+        'token'
     ];
     
     /* @var array */
@@ -42,6 +44,11 @@ class Fluent
     /* @var array */
     protected $methodsRequiringAuthorization = [
         'post', 'put', 'patch', 'delete'
+    ];
+    
+    /** @var string[] */
+    public $typesWithoutJsonApi = [
+        'token'
     ];
     
     /* @var array */
@@ -60,7 +67,7 @@ class Fluent
     protected $includes = [];
     
     /* @var Client */
-    protected $flarum;
+    protected $client;
     
     /* @var string */
     protected $method = 'get';
@@ -70,7 +77,7 @@ class Fluent
     
     public function __construct(Client $flarum)
     {
-        $this->flarum = $flarum;
+        $this->client = $flarum;
     }
     
     public function reset(): Fluent
@@ -112,8 +119,8 @@ class Fluent
         $this->method = strtolower($method);
     
         if (
-            $this->flarum->isStrict() &&
-            !$this->flarum->isAuthorized() &&
+            $this->client->isStrict() &&
+            !$this->client->isAuthorized() &&
             in_array($this->method, $this->methodsRequiringAuthorization, true)) {
             throw new UnauthorizedRequestMethodException($this->method);
         }
@@ -137,15 +144,20 @@ class Fluent
         } else {
             $this->variables = $variables;
         }
-
+    
         return $this;
     }
-
+    
     public function getMethod(): string
     {
         return $this->method;
     }
-
+    
+    public function getType(): string
+    {
+        return $this->segments[0];
+    }
+    
     public function getVariables(): array
     {
         return $this->variables;
@@ -214,17 +226,17 @@ class Fluent
             }
             return $this->setMethod($name);
         }
-        
+    
         if (count($arguments) <= 1 && in_array($name, $this->types, true)) {
             return $this->handleType($name, $arguments[0] ?? null);
         }
-        
+    
         if (in_array($name, $this->pagination, true) && count($arguments) === 1) {
             return call_user_func_array([$this, 'handlePagination'], Arr::prepend($arguments, $name));
         }
-        
-        if (method_exists($this->flarum, $name)) {
-            return call_user_func_array([$this->flarum, $name], $arguments);
+    
+        if (method_exists($this->client, $name)) {
+            return call_user_func_array([$this->client, $name], $arguments);
         }
     }
 }

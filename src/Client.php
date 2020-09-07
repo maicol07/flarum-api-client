@@ -103,16 +103,18 @@ class Client
     protected function getVariablesForMethod(): array
     {
         $variables = $this->fluent->getVariables();
-        
+    
         if (empty($variables)) {
             return [];
         }
-        
+    
         if ($this->fluent->getMethod() === 'get') {
             return $variables;
         }
-        
-        return [
+    
+        return in_array($this->fluent->getType(), $this->fluent->typesWithoutJsonApi, true) ? [
+            'json' => $variables
+        ] : [
             'json' => ['data' => $variables]
         ];
     }
