@@ -9,11 +9,12 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * Class Fluent
  * @package Maicol07\Client\Api
  *
- * @method Fluent discussions(string|int|null $id = null)
- * @method Fluent groups(string|int|null $id = null)
- * @method Fluent users(string|int|null $id = null)
- * @method Fluent tags(string|int|null $id = null)
- * @method Fluent token()
+ * @method Fluent token() Get user token
+ * @method Fluent discussions(string|int|null $id = null) Get discussions or only one if you provide an ID
+ * @method Fluent groups(string|int|null $id = null) Get groups or only one if you provide an ID
+ * @method Fluent users(string|int|null $id = null) Get users or only one if you provide an ID
+ * @method Fluent tags(string|int|null $id = null) Get tags or only one if you provide an ID
+ *
  *
  * @method Fluent get
  * @method Fluent head
@@ -21,7 +22,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @method Fluent put(array $variables = [])
  * @method Fluent patch(array $variables = [])
  * @method Fluent delete
- * @method bool|Resource\Collection|Resource\Item|null|Resource\Token request()
+ * @method bool|Resource\Collection|Resource\Item|null|Resource\Token request() If called alone, it returns Flarum info
  */
 class Fluent
 {
