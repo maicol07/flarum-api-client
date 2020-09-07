@@ -2,6 +2,7 @@
 
 namespace Maicol07\Flarum\Api\Resource;
 
+use ArrayAccess;
 use Illuminate\Support\Arr;
 use Maicol07\Flarum\Api\Traits\HasRelationships;
 use Maicol07\Flarum\Api\Traits\UsesCache;
@@ -19,36 +20,37 @@ class Item extends Resource
      * @var int
      */
     public $id;
-
+    
     /**
      * @var array
      */
     public $attributes = [];
-
+    
     public function __construct(array $item = [])
     {
         $this->id = (int) Arr::get($item, 'id');
         $this->type = Arr::get($item, 'type');
         $this->attributes = Arr::get($item, 'attributes', []);
-
+        
         $this->relations(Arr::get($item, 'relationships', []));
     }
-
+    
     /**
-     * {@inheritdoc}
+     * @param $name
+     * @return array|ArrayAccess|mixed
      */
     function __get($name)
     {
         if (Arr::has($this->attributes, $name)) {
             return Arr::get($this->attributes, $name);
         }
-
+        
         if (Arr::has($this->relationships, $name)) {
             return Arr::get($this->relationships, $name);
         }
     }
-
-    public function toArray()
+    
+    public function toArray(): array
     {
         return [
             'id' => $this->id,

@@ -18,11 +18,11 @@ trait HasRelationships
     /**
      * @param array $relations
      */
-    protected function relations(array $relations = [])
+    protected function relations(array $relations = []): void
     {
         foreach ($relations as $attribute => $relation) {
             $data = Arr::get($relation, 'data');
-
+        
             // Single item.
             if (Arr::get($data, 'type')) {
                 $this->relationships[$attribute] = $this->parseRelationshipItem(
@@ -48,7 +48,7 @@ trait HasRelationships
      * @param int $id
      * @return Item|null
      */
-    protected function parseRelationshipItem(string $type, int $id)
+    protected function parseRelationshipItem(string $type, int $id): ?Item
     {
         return Client::getCache()->get($id, null, $type);
     }

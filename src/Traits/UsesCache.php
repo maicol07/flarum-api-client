@@ -8,10 +8,11 @@ use Maicol07\Flarum\Api\Resource\Item;
 trait UsesCache
 {
     /**
-     * @return Item
+     * @return Item|UsesCache
      */
     public function cache()
     {
+        /** @noinspection PhpParamsInspection */
         Client::getCache()->set($this->id, $this, $this->type);
 
         return $this;

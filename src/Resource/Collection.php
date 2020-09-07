@@ -26,12 +26,12 @@ class Collection extends Resource
     /**
      * @return Collection
      */
-    public function cache()
+    public function cache(): Collection
     {
         foreach ($this->items as $id => $item) {
             $item->cache();
         }
-
+    
         return $this;
     }
 

@@ -35,7 +35,8 @@
         "guzzlehttp/guzzle": "^7",
         "illuminate/cache": "^7",
         "illuminate/support": "^7",
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9",

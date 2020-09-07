@@ -48,9 +48,9 @@ class Cache
     }
 
     /**
-     * @return Store
+     * @return string
      */
-    public function getActive(): Store
+    public function getActive(): string
     {
         return $this->active;
     }
@@ -102,6 +102,7 @@ class Cache
      */
     public function all(string $type = null)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         return $this->getStore($type)->all();
     }
 }

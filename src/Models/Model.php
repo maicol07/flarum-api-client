@@ -2,6 +2,7 @@
 
 namespace Maicol07\Flarum\Api\Models;
 
+use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Maicol07\Flarum\Api\Client;
@@ -23,37 +24,37 @@ abstract class Model
      * @var array
      */
     protected $attributes = [];
-
+    
     public function __construct(array $attributes = [])
     {
         if (Arr::has($attributes, 'id')) {
             $this->id = Arr::pluck($attributes, 'id');
         }
-
+        
         $this->attributes = $attributes;
     }
-
+    
     public static function fromResource(Item $item)
     {
         $class = sprintf("%s\\%s", __NAMESPACE__, Str::camel(Str::singular($item->type)));
-
+        
         if (class_exists($class)) {
             $response = new $class($item->attributes);
-
+            
             if ($item->id) {
                 $response->id = $item->id;
             }
-
+            
             return $response;
         }
-
+        
         throw new InvalidArgumentException("Resource type {$item->type} could not be migrated to Model");
     }
     
     /**
      * @param Client $dispatcher
      */
-    public static function setDispatcher(Client $dispatcher)
+    public static function setDispatcher(Client $dispatcher): void
     {
         self::$dispatcher = $dispatcher;
     }
@@ -65,7 +66,7 @@ abstract class Model
     {
         return self::$dispatcher;
     }
-
+    
     /**
      * Resource type.
      *
@@ -77,7 +78,7 @@ abstract class Model
             Str::replaceFirst(__NAMESPACE__ . '\\', '', static::class)
         ));
     }
-
+    
     /**
      * Generated resource item.
      *
@@ -90,7 +91,7 @@ abstract class Model
             'attributes' => $this->attributes
         ]);
     }
-
+    
     /**
      * @return array
      */
@@ -98,15 +99,15 @@ abstract class Model
     {
         return $this->attributes;
     }
-
+    
     /**
      * @param Model $relation
      */
-    public function addRelation($relation)
+    public function addRelation(Model $relation): void
     {
-
+    
     }
-
+    
     /**
      * @return Fluent
      */
@@ -117,15 +118,15 @@ abstract class Model
             static::$dispatcher,
             $this->type()
         ], []);
-
+        
         // Set resource Id.
         if ($this->id) {
             $dispatch->id($this->id);
         }
-
+        
         return $dispatch;
     }
-
+    
     /**
      * @return mixed
      */
@@ -134,10 +135,10 @@ abstract class Model
         if (!$this->id) {
             throw new InvalidArgumentException("Resource doesn't exist.");
         }
-
+        
         return $this->baseRequest()->delete()->request();
     }
-
+    
     /**
      * Creates or updates a resource.
      *
@@ -153,11 +154,12 @@ abstract class Model
             // Send request.
             ->request();
     }
-
+    
     /**
-     * {@inheritdoc}
+     * @param $name
+     * @param $value
      */
-    function __set($name, $value)
+    public function __set($name, $value)
     {
         if ($name === 'id') {
             $this->id = $value;
@@ -165,11 +167,12 @@ abstract class Model
             $this->attributes[$name] = $value;
         }
     }
-
+    
     /**
-     * {@inheritdoc}
+     * @param $name
+     * @return array|ArrayAccess|mixed
      */
-    function __get($name)
+    public function __get($name)
     {
         return Arr::get($this->attributes, $name);
     }
