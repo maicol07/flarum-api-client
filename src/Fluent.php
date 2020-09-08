@@ -10,12 +10,15 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  * @package Maicol07\Client\Api
  *
  * @method Fluent token() Set the token endpoint
- * @method Fluent discussions(string|int|null $id = null) Set the discussions endpoint and optionally filter the results providing a discussion ID
- * @method Fluent groups(string|int|null $id = null) Set the groups endpoint and optionally filter the results providing a group ID
- * @method Fluent users(string|int|null $id = null) Set the users endpoint and optionally filter the results providing a user ID
- * @method Fluent tags(string|int|null $id = null) Set the tags endpoint and optionally filter the results providing a tag ID
+ * @method Fluent discussions(int|null $id = null) Set the discussions endpoint and optionally filter the results providing a discussion ID
+ * @method Fluent posts(int|null $id = null) Set the posts endpoint and optionally filter the results providing a discussion ID
+ * @method Fluent users(string|int|null $id = null) Set the users endpoint and optionally filter the results providing a user ID or username
+ * @method Fluent groups(int|null $id = null) Set the groups endpoint and optionally filter the results providing a group ID
+ * @method Fluent notifications(int|null $id = null) Set the notifications endpoint. Only pass the notification ID if you are using the PATCH method
+ * @method Fluent tags(int|null $id = null) Set the tags endpoint and optionally filter the results providing a tag ID
  *
  * @method Fluent get() Set the GET request method
+ * @method Fluent page(int $page = 0) Set the page to request in the current GET request
  * @method Fluent head() Set the HEAD request method
  * @method Fluent post(array $variables = []) Set the POST request method and optionally send a JSON body, written as an array
  * @method Fluent put(array $variables = []) Set the PUT request method and optionally send a JSON body, written as an array
@@ -30,8 +33,10 @@ class Fluent
     protected $types = [
         'token',
         'discussions',
+        'posts',
         'users',
         'groups',
+        'notifications',
         'tags',
     ];
     
@@ -173,14 +178,14 @@ class Fluent
     public function id(int $id): Fluent
     {
         $this->segments[] = $id;
-
+    
         return $this;
     }
-
+    
     public function include(string $include): Fluent
     {
         $this->includes[] = $include;
-
+    
         return $this;
     }
     
