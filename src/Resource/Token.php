@@ -3,7 +3,6 @@
 
 namespace Maicol07\Flarum\Api\Resource;
 
-
 use ArrayAccess;
 use Illuminate\Support\Arr;
 

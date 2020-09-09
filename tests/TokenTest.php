@@ -3,7 +3,6 @@
 
 namespace Maicol07\Flarum\Api\Tests;
 
-
 use Maicol07\Flarum\Api\Resource\Token;
 
 class TokenTest extends TestCase

@@ -96,7 +96,7 @@ class DiscussionTest extends TestCase
      * @depends createsDiscussions
      * @param Item $resource
      */
-    public function deletesDiscussions(Item $resource)
+    public function deletesDiscussions(Item $resource): void
     {
         if (!$this->client->isAuthorized()) {
             self::markTestSkipped('No authentication set.');

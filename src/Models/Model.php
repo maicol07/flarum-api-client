@@ -105,7 +105,6 @@ abstract class Model
      */
     public function addRelation(Model $relation): void
     {
-    
     }
     
     /**

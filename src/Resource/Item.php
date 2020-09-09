@@ -39,15 +39,16 @@ class Item extends Resource
      * @param $name
      * @return array|ArrayAccess|mixed
      */
-    function __get($name)
+    public function __get($name)
     {
         if (Arr::has($this->attributes, $name)) {
             return Arr::get($this->attributes, $name);
         }
-        
+    
         if (Arr::has($this->relationships, $name)) {
             return Arr::get($this->relationships, $name);
         }
+        return $this->$name;
     }
     
     public function toArray(): array
