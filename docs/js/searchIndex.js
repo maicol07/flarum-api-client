@@ -206,10 +206,10 @@ Search.appendIndex(
         "summary": "",
         "url": "../classes/Maicol07-Flarum-Api-Fluent.html#method_getVariables"
     }, {
-        "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003AhandlePagination\u0028\u0029",
-        "name": "handlePagination",
+        "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003AaddQueryParameter\u0028\u0029",
+        "name": "addQueryParameter",
         "summary": "",
-        "url": "../classes/Maicol07-Flarum-Api-Fluent.html#method_handlePagination"
+        "url": "../classes/Maicol07-Flarum-Api-Fluent.html#method_addQueryParameter"
     }, {
         "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003Aid\u0028\u0029",
         "name": "id",
@@ -223,8 +223,13 @@ Search.appendIndex(
     }, {
         "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003Aoffset\u0028\u0029",
         "name": "offset",
-        "summary": "",
+        "summary": "Set\u0020the\u0020page\u0020offset\u0020of\u0020the\u0020current\u0020GET\u0020request",
         "url": "../classes/Maicol07-Flarum-Api-Fluent.html#method_offset"
+    }, {
+        "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003Afilter\u0028\u0029",
+        "name": "filter",
+        "summary": "Add\u0020a\u0020filter\u0020to\u0020the\u0020current\u0020GET\u0020request",
+        "url": "../classes/Maicol07-Flarum-Api-Fluent.html#method_filter"
     }, {
         "fqsen": "\\Maicol07\\Flarum\\Api\\Fluent\u003A\u003A__toString\u0028\u0029",
         "name": "__toString",

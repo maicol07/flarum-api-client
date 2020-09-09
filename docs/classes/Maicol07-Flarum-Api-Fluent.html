@@ -85,7 +85,7 @@
                     <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
                             href="../files/src-fluent.html"><abbr title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                     :
-                    <span class="phpdocumentor-element-found-in__line">27</span>
+                    <span class="phpdocumentor-element-found-in__line">30</span>
                 </aside>
 
                 <p class="phpdocumentor-class__summary">Class Fluent</p>
@@ -227,7 +227,7 @@
                     </tr>
                     <tr>
                         <th class="phpdocumentor-heading"><a
-                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_handlePagination">handlePagination()</a>
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_addQueryParameter">addQueryParameter()</a>
                         </th>
                         <td class="phpdocumentor-cell"></td>
                         <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
@@ -250,7 +250,14 @@
                     <tr>
                         <th class="phpdocumentor-heading"><a
                                 href="../classes/Maicol07-Flarum-Api-Fluent.html#method_offset">offset()</a></th>
-                        <td class="phpdocumentor-cell"></td>
+                        <td class="phpdocumentor-cell">Set the page offset of the current GET request</td>
+                        <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
+                    </tr>
+                    <tr>
+                        <th class="phpdocumentor-heading"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_filter">filter()</a></th>
+                        <td class="phpdocumentor-cell">Add a filter to the current GET request</td>
                         <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
                     </tr>
@@ -285,7 +292,7 @@
                     </tr>
                     <tr>
                         <th class="phpdocumentor-heading"><a
-                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_groups">groups()</a></th>
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_posts">posts()</a></th>
                         <td class="phpdocumentor-cell"></td>
                         <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
@@ -293,6 +300,21 @@
                     <tr>
                         <th class="phpdocumentor-heading"><a
                                 href="../classes/Maicol07-Flarum-Api-Fluent.html#method_users">users()</a></th>
+                        <td class="phpdocumentor-cell"></td>
+                        <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
+                    </tr>
+                    <tr>
+                        <th class="phpdocumentor-heading"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_groups">groups()</a></th>
+                        <td class="phpdocumentor-cell"></td>
+                        <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
+                    </tr>
+                    <tr>
+                        <th class="phpdocumentor-heading"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_notifications">notifications()</a>
+                        </th>
                         <td class="phpdocumentor-cell"></td>
                         <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
@@ -307,6 +329,13 @@
                     <tr>
                         <th class="phpdocumentor-heading"><a
                                 href="../classes/Maicol07-Flarum-Api-Fluent.html#method_get">get()</a></th>
+                        <td class="phpdocumentor-cell"></td>
+                        <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
+                    </tr>
+                    <tr>
+                        <th class="phpdocumentor-heading"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html#method_page">page()</a></th>
                         <td class="phpdocumentor-cell"></td>
                         <td class="phpdocumentor-cell"><a href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></td>
@@ -376,13 +405,13 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">30</span>
+                            <span class="phpdocumentor-element-found-in__line">33</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
                             <span class="phpdocumentor-signature__type">mixed</span>
                             <span class="phpdocumentor-signature__name">$types</span>
-                            = <span class="phpdocumentor-signature__default-value">[&#039;token&#039;, &#039;discussions&#039;, &#039;users&#039;, &#039;groups&#039;, &#039;tags&#039;]</span>
+                            = <span class="phpdocumentor-signature__default-value">[&#039;token&#039;, &#039;discussions&#039;, &#039;posts&#039;, &#039;users&#039;, &#039;groups&#039;, &#039;notifications&#039;, &#039;tags&#039;]</span>
                         </code>
                     </article>
                     <a id="property_methods"></a>
@@ -398,7 +427,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">39</span>
+                            <span class="phpdocumentor-element-found-in__line">44</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -420,7 +449,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">46</span>
+                            <span class="phpdocumentor-element-found-in__line">51</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -442,7 +471,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">51</span>
+                            <span class="phpdocumentor-element-found-in__line">56</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -463,14 +492,13 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">56</span>
+                            <span class="phpdocumentor-element-found-in__line">61</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
                             <span class="phpdocumentor-signature__type">mixed</span>
                             <span class="phpdocumentor-signature__name">$pagination</span>
-                            = <span class="phpdocumentor-signature__default-value">[&#039;filter&#039;, &#039;page&#039;]</span>
-                        </code>
+                            = <span class="phpdocumentor-signature__default-value">[&#039;page&#039;]</span> </code>
                     </article>
                     <a id="property_segments"></a>
                     <article
@@ -485,7 +513,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">62</span>
+                            <span class="phpdocumentor-element-found-in__line">66</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -506,7 +534,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">65</span>
+                            <span class="phpdocumentor-element-found-in__line">69</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -527,7 +555,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">68</span>
+                            <span class="phpdocumentor-element-found-in__line">72</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -548,7 +576,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">71</span>
+                            <span class="phpdocumentor-element-found-in__line">75</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -569,7 +597,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">74</span>
+                            <span class="phpdocumentor-element-found-in__line">78</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -590,7 +618,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">77</span>
+                            <span class="phpdocumentor-element-found-in__line">81</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -615,7 +643,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">79</span>
+                            <span class="phpdocumentor-element-found-in__line">83</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -661,7 +689,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">84</span>
+                            <span class="phpdocumentor-element-found-in__line">88</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -692,7 +720,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">95</span>
+                            <span class="phpdocumentor-element-found-in__line">99</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
@@ -750,7 +778,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">106</span>
+                            <span class="phpdocumentor-element-found-in__line">110</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -797,7 +825,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">118</span>
+                            <span class="phpdocumentor-element-found-in__line">122</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -853,7 +881,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">132</span>
+                            <span class="phpdocumentor-element-found-in__line">136</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -900,7 +928,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">152</span>
+                            <span class="phpdocumentor-element-found-in__line">156</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -927,7 +955,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">157</span>
+                            <span class="phpdocumentor-element-found-in__line">161</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -954,7 +982,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">162</span>
+                            <span class="phpdocumentor-element-found-in__line">166</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -968,24 +996,24 @@
                         <span class="phpdocumentor-signature__response_type">array</span>
 
                     </article>
-                    <a id="method_handlePagination"></a>
+                    <a id="method_addQueryParameter"></a>
                     <article
                             class="
             phpdocumentor-method
             phpdocumentor-method--protected
                                                         "
                     >
-                        <h4 class="phpdocumentor-method__name">handlePagination()</h4>
+                        <h4 class="phpdocumentor-method__name">addQueryParameter()</h4>
                         <aside class="phpdocumentor-element-found-in">
                             <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">167</span>
+                            <span class="phpdocumentor-element-found-in__line">171</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">protected</span>
-                            <span class="phpdocumentor-signature__name">handlePagination</span>(
+                            <span class="phpdocumentor-signature__name">addQueryParameter</span>(
                             <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$type</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
@@ -1039,7 +1067,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">174</span>
+                            <span class="phpdocumentor-element-found-in__line">178</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -1086,7 +1114,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">181</span>
+                            <span class="phpdocumentor-element-found-in__line">185</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -1133,8 +1161,9 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">188</span>
+                            <span class="phpdocumentor-element-found-in__line">198</span>
                         </aside>
+                        <p class="phpdocumentor-summary">Set the page offset of the current GET request</p>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
                             <span class="phpdocumentor-signature__name">offset</span>(
@@ -1167,6 +1196,54 @@
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
 
                     </article>
+                    <a id="method_filter"></a>
+                    <article
+                            class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+                    >
+                        <h4 class="phpdocumentor-method__name">filter()</h4>
+                        <aside class="phpdocumentor-element-found-in">
+                            <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
+                                    href="../files/src-fluent.html"><abbr
+                                    title="src/Fluent.php">Fluent.php</abbr></a></abbr>
+                            :
+                            <span class="phpdocumentor-element-found-in__line">209</span>
+                        </aside>
+                        <p class="phpdocumentor-summary">Add a filter to the current GET request</p>
+                        <code class="phpdocumentor-signature phpdocumentor-code ">
+                            <span class="phpdocumentor-signature__visibility">public</span>
+                            <span class="phpdocumentor-signature__name">filter</span>(
+                            <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$filters</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                            )
+                            : <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+                        </code>
+
+
+                        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+                        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                                <span class="phpdocumentor-signature__argument__name">$filters</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                = <span class="phpdocumentor-signature__argument__default-value">[]</span></dt>
+                            <dd class="phpdocumentor-argument-list__definition">
+                                <section class="phpdocumentor-description"></section>
+                            </dd>
+                        </dl>
+
+
+                        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+                        <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+
+                    </article>
                     <a id="method___toString"></a>
                     <article
                             class="
@@ -1180,7 +1257,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">193</span>
+                            <span class="phpdocumentor-element-found-in__line">217</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -1207,7 +1284,7 @@
                                     href="../files/src-fluent.html"><abbr
                                     title="src/Fluent.php">Fluent.php</abbr></a></abbr>
                             :
-                            <span class="phpdocumentor-element-found-in__line">222</span>
+                            <span class="phpdocumentor-element-found-in__line">246</span>
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
@@ -1325,7 +1402,7 @@
                             <span class="phpdocumentor-signature__name">discussions</span>(
                             <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$id = null</span> :
-                <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </span>
                             )
                             : <span class="phpdocumentor-signature__response_type"><a
@@ -1340,7 +1417,7 @@
                         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                                 <span class="phpdocumentor-signature__argument__name">$id = null</span>
-                                : <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
                             <dd class="phpdocumentor-argument-list__definition">
                                 <section class="phpdocumentor-description"></section>
@@ -1354,14 +1431,14 @@
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
 
                     </article>
-                    <a id="method_groups"></a>
+                    <a id="method_posts"></a>
                     <article
                             class="
             phpdocumentor-method
             phpdocumentor-method--public
                                                         "
                     >
-                        <h4 class="phpdocumentor-method__name">groups()</h4>
+                        <h4 class="phpdocumentor-method__name">posts()</h4>
                         <aside class="phpdocumentor-element-found-in">
                             <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
                                     href="../files/src-fluent.html"><abbr
@@ -1371,10 +1448,10 @@
                         </aside>
                         <code class="phpdocumentor-signature phpdocumentor-code ">
                             <span class="phpdocumentor-signature__visibility">public</span>
-                            <span class="phpdocumentor-signature__name">groups</span>(
+                            <span class="phpdocumentor-signature__name">posts</span>(
                             <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$id = null</span> :
-                <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </span>
                             )
                             : <span class="phpdocumentor-signature__response_type"><a
@@ -1382,14 +1459,14 @@
                                 title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
                         </code>
 
-                        <section class="phpdocumentor-description"><p>Set the groups endpoint and optionally filter the
-                            results providing a group ID</p></section>
+                        <section class="phpdocumentor-description"><p>Set the posts endpoint and optionally filter the
+                            results providing a discussion ID</p></section>
 
                         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
                         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                                 <span class="phpdocumentor-signature__argument__name">$id = null</span>
-                                : <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
                             <dd class="phpdocumentor-argument-list__definition">
                                 <section class="phpdocumentor-description"></section>
@@ -1432,13 +1509,111 @@
                         </code>
 
                         <section class="phpdocumentor-description"><p>Set the users endpoint and optionally filter the
-                            results providing a user ID</p></section>
+                            results providing a user ID or username</p></section>
 
                         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
                         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                                 <span class="phpdocumentor-signature__argument__name">$id = null</span>
                                 : <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                            </dt>
+                            <dd class="phpdocumentor-argument-list__definition">
+                                <section class="phpdocumentor-description"></section>
+                            </dd>
+                        </dl>
+
+
+                        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+                        <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+
+                    </article>
+                    <a id="method_groups"></a>
+                    <article
+                            class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+                    >
+                        <h4 class="phpdocumentor-method__name">groups()</h4>
+                        <aside class="phpdocumentor-element-found-in">
+                            <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
+                                    href="../files/src-fluent.html"><abbr
+                                    title="src/Fluent.php">Fluent.php</abbr></a></abbr>
+                            :
+                            <span class="phpdocumentor-element-found-in__line">0</span>
+                        </aside>
+                        <code class="phpdocumentor-signature phpdocumentor-code ">
+                            <span class="phpdocumentor-signature__visibility">public</span>
+                            <span class="phpdocumentor-signature__name">groups</span>(
+                            <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$id = null</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </span>
+                            )
+                            : <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+                        </code>
+
+                        <section class="phpdocumentor-description"><p>Set the groups endpoint and optionally filter the
+                            results providing a group ID</p></section>
+
+                        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+                        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                                <span class="phpdocumentor-signature__argument__name">$id = null</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+                            <dd class="phpdocumentor-argument-list__definition">
+                                <section class="phpdocumentor-description"></section>
+                            </dd>
+                        </dl>
+
+
+                        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+                        <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+
+                    </article>
+                    <a id="method_notifications"></a>
+                    <article
+                            class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+                    >
+                        <h4 class="phpdocumentor-method__name">notifications()</h4>
+                        <aside class="phpdocumentor-element-found-in">
+                            <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
+                                    href="../files/src-fluent.html"><abbr
+                                    title="src/Fluent.php">Fluent.php</abbr></a></abbr>
+                            :
+                            <span class="phpdocumentor-element-found-in__line">0</span>
+                        </aside>
+                        <code class="phpdocumentor-signature phpdocumentor-code ">
+                            <span class="phpdocumentor-signature__visibility">public</span>
+                            <span class="phpdocumentor-signature__name">notifications</span>(
+                            <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$id = null</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </span>
+                            )
+                            : <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+                        </code>
+
+                        <section class="phpdocumentor-description"><p>Set the notifications endpoint. Only pass the
+                            notification ID if you are using the PATCH method</p></section>
+
+                        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+                        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                                <span class="phpdocumentor-signature__argument__name">$id = null</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
                             <dd class="phpdocumentor-argument-list__definition">
                                 <section class="phpdocumentor-description"></section>
@@ -1472,7 +1647,7 @@
                             <span class="phpdocumentor-signature__name">tags</span>(
                             <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$id = null</span> :
-                <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </span>
                             )
                             : <span class="phpdocumentor-signature__response_type"><a
@@ -1487,7 +1662,7 @@
                         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                                 <span class="phpdocumentor-signature__argument__name">$id = null</span>
-                                : <span class="phpdocumentor-signature__argument__return-type">string|int|null</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
                             <dd class="phpdocumentor-argument-list__definition">
                                 <section class="phpdocumentor-description"></section>
@@ -1526,6 +1701,55 @@
                         </code>
 
                         <section class="phpdocumentor-description"><p>Set the GET request method</p></section>
+
+
+                        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+                        <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+
+                    </article>
+                    <a id="method_page"></a>
+                    <article
+                            class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+                    >
+                        <h4 class="phpdocumentor-method__name">page()</h4>
+                        <aside class="phpdocumentor-element-found-in">
+                            <abbr class="phpdocumentor-element-found-in__file" title="src/Fluent.php"><a
+                                    href="../files/src-fluent.html"><abbr
+                                    title="src/Fluent.php">Fluent.php</abbr></a></abbr>
+                            :
+                            <span class="phpdocumentor-element-found-in__line">0</span>
+                        </aside>
+                        <code class="phpdocumentor-signature phpdocumentor-code ">
+                            <span class="phpdocumentor-signature__visibility">public</span>
+                            <span class="phpdocumentor-signature__name">page</span>(
+                            <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$page = 0</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                            )
+                            : <span class="phpdocumentor-signature__response_type"><a
+                                href="../classes/Maicol07-Flarum-Api-Fluent.html"><abbr
+                                title="\Maicol07\Flarum\Api\Fluent">Fluent</abbr></a></span>
+                        </code>
+
+                        <section class="phpdocumentor-description"><p>Set the page to request in the current GET
+                            request</p></section>
+
+                        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+                        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                                <span class="phpdocumentor-signature__argument__name">$page = 0</span>
+                                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+                            <dd class="phpdocumentor-argument-list__definition">
+                                <section class="phpdocumentor-description"></section>
+                            </dd>
+                        </dl>
 
 
                         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
