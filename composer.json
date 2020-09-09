@@ -33,8 +33,8 @@
     "name": "maicol07/flarum-api-client",
     "require": {
         "guzzlehttp/guzzle": "^7",
-        "illuminate/cache": "^7",
-        "illuminate/support": "^7",
+        "illuminate/cache": "^8",
+        "illuminate/support": "^8",
         "php": ">=7.2",
         "ext-json": "*"
     },
