@@ -1,6 +1,6 @@
 <?php
 namespace {
-    require_once "vendor/illuminate/support/helpers.php";
+    require_once __DIR__ . "/../vendor/illuminate/support/helpers.php";
 }
 
 namespace Maicol07\Flarum\Api\Tests {
