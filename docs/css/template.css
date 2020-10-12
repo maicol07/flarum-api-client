@@ -839,10 +839,7 @@ td.phpdocumentor-cell:last-child {
 }
 
 .phpdocumentor-class-graph {
-    width: 100%;
-    height: 600px;
-    border: 1px solid black;
-    overflow: hidden
+    width: 100%; height: 600px; border:1px solid black; overflow: hidden
 }
 
 .phpdocumentor-class-graph__graph {
@@ -857,7 +854,8 @@ td.phpdocumentor-cell:last-child {
 .phpdocumentor-content h3 .headerlink,
 .phpdocumentor-content h4 .headerlink,
 .phpdocumentor-content h5 .headerlink,
-.phpdocumentor-content h6 .headerlink {
+.phpdocumentor-content h6 .headerlink
+{
     display: none;
     padding-left: 10px;
     text-decoration: none;
@@ -869,7 +867,8 @@ td.phpdocumentor-cell:last-child {
 .phpdocumentor-content h3:hover .headerlink,
 .phpdocumentor-content h4:hover .headerlink,
 .phpdocumentor-content h5:hover .headerlink,
-.phpdocumentor-content h6:hover .headerlink {
+.phpdocumentor-content h6:hover .headerlink
+{
     display: initial;
 }
 
