@@ -127,7 +127,13 @@ class Client
         ];
     }
     
-    public function __call($name, $arguments): bool
+    /**
+     * @param $name
+     * @param $arguments
+     * @return false|mixed
+     * @noinspection PhpMissingReturnTypeInspection
+     */
+    public function __call($name, $arguments)
     {
         return call_user_func_array([$this->fluent, $name], $arguments);
     }
