@@ -253,11 +253,12 @@ class Fluent
     /**
      * @param $name
      * @param $arguments
-     * @return Fluent
+     * @return Fluent|void|mixed
      * @throws UnauthorizedRequestMethodException
-     * @noinspection PhpInconsistentReturnPointsInspection
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function __call($name, $arguments): Fluent
+    public function __call($name, $arguments)
     {
         if (in_array($name, $this->methods, true)) {
             if (!empty($arguments)) {
