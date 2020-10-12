@@ -37,10 +37,42 @@ class Client
             'base_uri' => "$host/api/",
             'headers' => $this->getHeaders($authorization)
         ], $options));
-        
+    
         $this->fluent = new Fluent($this);
-        
+    
         static::$cache = new Cache(new ArrayStore);
+    }
+    
+    /**
+     * Request to Flarum the specified resource
+     *
+     * @return bool|Resource\Collection|Resource\Item|null
+     * @noinspection PhpInconsistentReturnPointsInspection
+     */
+    public function request()
+    {
+        $method = $this->fluent->getMethod();
+        
+        $options = $this->getVariablesForMethod();
+        
+        $additional_headers = $this->fluent->getHeaders();
+        if (!empty($additional_headers)) {
+            $headers = array_merge($this->client->getConfig('headers'), $additional_headers);
+            $options = array_merge($options, ['headers' => $headers]);
+        }
+        
+        /** @var ResponseInterface $response */
+        try {
+            $response = $this->client->{$method}((string)$this->fluent, $options);
+        } finally {
+            // Reset the fluent builder for a new request.
+            $this->fluent->reset();
+        }
+        
+        /** @noinspection NotOptimalIfConditionsInspection */
+        if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+            return Factory::build($response);
+        }
     }
     
     /**
@@ -76,30 +108,6 @@ class Client
         return self::$cache;
     }
     
-    /**
-     * Request to Flarum the specified resource
-     *
-     * @return bool|Resource\Collection|Resource\Item|null
-     * @noinspection PhpInconsistentReturnPointsInspection
-     */
-    public function request()
-    {
-        $method = $this->fluent->getMethod();
-        
-        /** @var ResponseInterface $response */
-        try {
-            $response = $this->client->{$method}((string)$this->fluent, $this->getVariablesForMethod());
-        } finally {
-            // Reset the fluent builder for a new request.
-            $this->fluent->reset();
-        }
-        
-        /** @noinspection NotOptimalIfConditionsInspection */
-        if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
-            return Factory::build($response);
-        }
-    }
-    
     protected function getVariablesForMethod(): array
     {
         $variables = $this->fluent->getVariables();
@@ -119,7 +127,7 @@ class Client
         ];
     }
     
-    public function __call($name, $arguments)
+    public function __call($name, $arguments): bool
     {
         return call_user_func_array([$this->fluent, $name], $arguments);
     }

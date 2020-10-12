@@ -52,6 +52,9 @@ class Fluent
         'post', 'put', 'patch', 'delete'
     ];
     
+    /* @var array */
+    protected $additional_headers = [];
+    
     /** @var string[] */
     public $typesWithoutJsonApi = [
         'token'
@@ -153,21 +156,6 @@ class Fluent
         return $this;
     }
     
-    public function getMethod(): string
-    {
-        return $this->method;
-    }
-    
-    public function getType(): string
-    {
-        return $this->segments[0];
-    }
-    
-    public function getVariables(): array
-    {
-        return $this->variables;
-    }
-    
     protected function addQueryParameter(string $type, $value): Fluent
     {
         $this->query[$type] = $value;
@@ -214,7 +202,33 @@ class Fluent
         return $this;
     }
     
-    public function __toString()
+    public function header(array $headers): Fluent
+    {
+        $this->additional_headers = array_merge($this->additional_headers, $headers);
+        return $this;
+    }
+    
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+    
+    public function getType(): string
+    {
+        return $this->segments[0];
+    }
+    
+    public function getVariables(): array
+    {
+        return $this->variables;
+    }
+    
+    public function getHeaders(): array
+    {
+        return $this->additional_headers;
+    }
+    
+    public function __toString(): string
     {
         $path = implode('/', $this->segments);
         
@@ -243,7 +257,7 @@ class Fluent
      * @throws UnauthorizedRequestMethodException
      * @noinspection PhpInconsistentReturnPointsInspection
      */
-    public function __call($name, $arguments)
+    public function __call($name, $arguments): Fluent
     {
         if (in_array($name, $this->methods, true)) {
             if (!empty($arguments)) {
@@ -251,7 +265,7 @@ class Fluent
             }
             return $this->setMethod($name);
         }
-    
+        
         if (count($arguments) <= 1 && in_array($name, $this->types, true)) {
             return $this->handleType($name, $arguments[0] ?? null);
         }
