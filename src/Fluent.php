@@ -105,6 +105,9 @@ class Fluent
 
         if ($id) {
             $this->segments[] = $id;
+            if ($type === 'users' && is_string($id)) {
+                $this->addQueryParameter('bySlug', true);
+            }
         }
 
         return $this;
@@ -256,7 +259,6 @@ class Fluent
      * @return Fluent|void|mixed
      * @throws UnauthorizedRequestMethodException
      *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function __call($name, $arguments)
     {

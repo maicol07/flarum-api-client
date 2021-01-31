@@ -131,7 +131,6 @@ class Client
      * @param $name
      * @param $arguments
      * @return false|mixed
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function __call($name, $arguments)
     {
