@@ -39,10 +39,10 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9",
+        "phpunit/phpunit": "9.5.1",
         "roave/security-advisories": "dev-master",
-        "vlucas/phpdotenv": "^5",
-        "phpoption/phpoption": "^1"
+        "vlucas/phpdotenv": "5.3.0",
+        "phpoption/phpoption": "1.7.5"
     },
     "suggest": {
         "vlucas/phpdotenv": "Required for running tests with Laravel 6 (^3.3) or Laravel 7 (^4). If you use Laravel 8 this package is already installed"
