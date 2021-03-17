@@ -29,7 +29,7 @@ use Maicol07\Flarum\Api\Exceptions\UnauthorizedRequestMethodException;
  */
 class Fluent
 {
-    /* @var array */
+    /** @var array */
     protected $types = [
         'token',
         'discussions',
@@ -39,55 +39,60 @@ class Fluent
         'notifications',
         'tags',
     ];
-    
-    /* @var array */
+
+    /** @var array */
     protected $methods = [
         'get', 'head',
         'post', 'put', 'patch',
         'delete'
     ];
-    
-    /* @var array */
+
+    /** @var array */
     protected $methodsRequiringAuthorization = [
         'post', 'put', 'patch', 'delete'
     ];
-    
-    /* @var array */
+
+    /** @var array */
     protected $additional_headers = [];
-    
+
     /** @var string[] */
     public $typesWithoutJsonApi = [
         'token'
     ];
-    
-    /* @var array */
+
+    /** @var array */
     protected $pagination = [
         'page'
     ];
-    
-    /* @var array */
+
+    /** @var array */
     protected $segments = [];
-    
-    /* @var array */
+
+    /** @var array */
     protected $query = [];
-    
-    /* @var array */
+
+    /** @var array */
     protected $includes = [];
-    
-    /* @var Client */
+
+    /** @var Client */
     protected $client;
-    
-    /* @var string */
+
+    /** @var string */
     protected $method = 'get';
-    
-    /* @var array */
+
+    /** @var array */
     protected $variables = [];
-    
+
     public function __construct(Client $flarum)
     {
         $this->client = $flarum;
     }
-    
+
+    /**
+     * Resets request data (segments (path), includes, query parameters, variables (json body), method)
+     *
+     * @return $this
+     */
     public function reset(): Fluent
     {
         $this->segments = [];
@@ -95,10 +100,20 @@ class Fluent
         $this->query = [];
         $this->variables = [];
         $this->method = 'get';
-        
+
         return $this;
     }
 
+    /**
+     * Handle request type
+     *
+     * @param string $type
+     * @param string|int $id If $type is user and ID is a string, it will be used as username. To use an ID, use an int
+     *
+     * @return $this
+     *
+     * @noinspection MissingParameterTypeDeclarationInspection
+     */
     protected function handleType(string $type, $id): Fluent
     {
         $this->segments[] = $type;
@@ -113,6 +128,13 @@ class Fluent
         return $this;
     }
 
+    /**
+     * Set API endpoint (for non-regular requests)
+     *
+     * @param string $path
+     *
+     * @return $this
+     */
     public function setPath(string $path): Fluent
     {
         $this->segments = [$path];
@@ -121,14 +143,18 @@ class Fluent
     }
 
     /**
+     * Set a request method
+     *
      * @param string $method
+     *
      * @return Fluent
+     *
      * @throws UnauthorizedRequestMethodException
      */
     public function setMethod(string $method): Fluent
     {
         $this->method = strtolower($method);
-    
+
         if (
             $this->client->isStrict() &&
             !$this->client->isAuthorized() &&
@@ -138,7 +164,13 @@ class Fluent
 
         return $this;
     }
-    
+
+    /**
+     * Set request variables (json body)
+     *
+     * @param array $variables
+     * @return $this
+     */
     public function setVariables(array $variables = []): Fluent
     {
         if (isset($variables['relationships'])) {
@@ -155,31 +187,55 @@ class Fluent
         } else {
             $this->variables = $variables;
         }
-    
-        return $this;
-    }
-    
-    protected function addQueryParameter(string $type, $value): Fluent
-    {
-        $this->query[$type] = $value;
-        
+
         return $this;
     }
 
+    /**
+     * Add query parameters to the request
+     *
+     * @param string $type Query parameter key
+     * @param mixed $value Query parameter value
+     *
+     * @return $this
+     * @noinspection MissingParameterTypeDeclarationInspection
+     */
+    protected function addQueryParameter(string $type, $value): Fluent
+    {
+        $this->query[$type] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Add resource ID.
+     * @param int $id
+     *
+     * @return $this
+     * @see handleType() for ID data type explanation for the user endpoint.
+     *
+     */
     public function id(int $id): Fluent
     {
         $this->segments[] = $id;
-    
+
         return $this;
     }
-    
+
+    /**
+     * Add include query parameter to the request
+     *
+     * @param string $include
+     *
+     * @return $this
+     */
     public function include(string $include): Fluent
     {
         $this->includes[] = $include;
-    
+
         return $this;
     }
-    
+
     /**
      * Set the page offset of the current GET request
      *
@@ -190,7 +246,7 @@ class Fluent
     {
         return $this->addQueryParameter('page[offset]', $number);
     }
-    
+
     /**
      * Add a filter to the current GET request
      *
@@ -204,41 +260,53 @@ class Fluent
         }
         return $this;
     }
-    
+
+    /**
+     * Add additional headers
+     *
+     * @param array $headers
+     *
+     * @return $this
+     */
     public function header(array $headers): Fluent
     {
         $this->additional_headers = array_merge($this->additional_headers, $headers);
         return $this;
     }
-    
+
     public function getMethod(): string
     {
         return $this->method;
     }
-    
+
     public function getType(): string
     {
         return $this->segments[0];
     }
-    
+
     public function getVariables(): array
     {
         return $this->variables;
     }
-    
+
     public function getHeaders(): array
     {
         return $this->additional_headers;
     }
-    
+
+    /**
+     * Returns request path
+     *
+     * @return string
+     */
     public function __toString(): string
     {
         $path = implode('/', $this->segments);
-        
+
         if ($this->includes || $this->query) {
             $path .= '?';
         }
-        
+
         if ($this->includes) {
             $path .= sprintf(
                 'include=%s&',
@@ -252,15 +320,18 @@ class Fluent
 
         return $path;
     }
-    
+
     /**
-     * @param $name
-     * @param $arguments
+     * @param string $name
+     * @param mixed $arguments
      * @return Fluent|void|mixed
+     *
      * @throws UnauthorizedRequestMethodException
      *
+     * @noinspection MissingReturnTypeInspection
+     * @noinspection MissingParameterTypeDeclarationInspection
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, $arguments)
     {
         if (in_array($name, $this->methods, true)) {
             if (!empty($arguments)) {
@@ -268,15 +339,15 @@ class Fluent
             }
             return $this->setMethod($name);
         }
-        
+
         if (count($arguments) <= 1 && in_array($name, $this->types, true)) {
             return $this->handleType($name, $arguments[0] ?? null);
         }
-    
+
         if (in_array($name, $this->pagination, true) && count($arguments) === 1) {
             return call_user_func_array([$this, 'addQueryParameter'], Arr::prepend($arguments, $name));
         }
-    
+
         if (method_exists($this->client, $name)) {
             return call_user_func_array([$this->client, $name], $arguments);
         }

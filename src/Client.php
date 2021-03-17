@@ -14,19 +14,20 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Client
 {
-    /* @var Cache */
+    /** @var Cache */
     protected static $cache;
-    /* @var \GuzzleHttp\Client */
+    /** @var \GuzzleHttp\Client */
     protected $client;
-    /* @var Fluent */
+    /** @var Fluent */
     protected $fluent;
-    /* @var bool Whether to enforce specific markup/variables setting. */
+    /** @var bool Whether to enforce specific markup/variables setting. */
     protected $authorized = false;
-    /* @var bool */
+    /** @var bool */
     protected $strict = true;
-    
+
     /**
      * Client constructor.
+     *
      * @param string $host Full FQDN hostname to your Flarum forum, eg http://example.com/forum
      * @param array $authorization Holding either "token" or "username" and "password" as keys.
      * @param array $options Custom options for the HTTP Client
@@ -37,48 +38,51 @@ class Client
             'base_uri' => "$host/api/",
             'headers' => $this->getHeaders($authorization)
         ], $options));
-    
+
         $this->fluent = new Fluent($this);
-    
+
         static::$cache = new Cache(new ArrayStore);
     }
-    
+
     /**
      * Request to Flarum the specified resource
      *
      * @return bool|Resource\Collection|Resource\Item|null
+     *
      * @noinspection PhpInconsistentReturnPointsInspection
+     * @noinspection MissingReturnTypeInspection
      */
     public function request()
     {
         $method = $this->fluent->getMethod();
-        
+
         $options = $this->getVariablesForMethod();
-        
+
         $additional_headers = $this->fluent->getHeaders();
         if (!empty($additional_headers)) {
             $headers = array_merge($this->client->getConfig('headers'), $additional_headers);
             $options = array_merge($options, ['headers' => $headers]);
         }
-        
-        /** @var ResponseInterface $response */
+
         try {
             $response = $this->client->{$method}((string)$this->fluent, $options);
+            assert($response instanceof ResponseInterface);
         } finally {
             // Reset the fluent builder for a new request.
             $this->fluent->reset();
         }
-        
+
         /** @noinspection NotOptimalIfConditionsInspection */
         if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
             return Factory::build($response);
         }
     }
-    
+
     /**
      * Get request headers
      *
      * @param array $authorization
+     *
      * @return string[]
      */
     protected function getHeaders(array $authorization = []): array
@@ -87,17 +91,17 @@ class Client
             'Accept' => 'application/vnd.api+json, application/json',
             'User-Agent' => 'Maicol07 Flarum Api Client'
         ];
-        
+
         $token = Arr::get($authorization, 'token');
-        
+
         if ($token) {
             $this->authorized = true;
             Arr::set($headers, 'Authorization', "Token $token");
         }
-        
+
         return $headers;
     }
-    
+
     /**
      * Get the cache object
      *
@@ -107,60 +111,68 @@ class Client
     {
         return self::$cache;
     }
-    
+
+    /**
+     * Get body variables
+     *
+     * @return array|array[]
+     */
     protected function getVariablesForMethod(): array
     {
         $variables = $this->fluent->getVariables();
-    
+
         if (empty($variables)) {
             return [];
         }
-    
+
         if ($this->fluent->getMethod() === 'get') {
             return $variables;
         }
-    
+
         return in_array($this->fluent->getType(), $this->fluent->typesWithoutJsonApi, true) ? [
             'json' => $variables
         ] : [
             'json' => ['data' => $variables]
         ];
     }
-    
+
     /**
-     * @param $name
-     * @param $arguments
+     * @param string $name
+     * @param mixed $arguments
      * @return false|mixed
+     *
+     * @noinspection MissingReturnTypeInspection
+     * @noinspection MissingParameterTypeDeclarationInspection
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, $arguments)
     {
         return call_user_func_array([$this->fluent, $name], $arguments);
     }
-    
+
     public function getFluent(): Fluent
     {
         return $this->fluent;
     }
-    
+
     public function getClient(): \GuzzleHttp\Client
     {
         return $this->client;
     }
-    
-    
+
+
     public function isStrict(): bool
     {
         return $this->strict;
     }
-    
+
     public function setStrict(bool $strict): Client
     {
         $this->strict = $strict;
         return $this;
     }
-    
+
     /**.
-     * User is authorized if an authorization header with the token exists
+     * Checks if user is authorized (an authorization header with the api token exists)
      *
      * @return bool
      */
