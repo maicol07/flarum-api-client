@@ -209,13 +209,14 @@ class Fluent
 
     /**
      * Add resource ID.
-     * @param int $id
+     * @param string|int $id
      *
      * @return $this
      * @see handleType() for ID data type explanation for the user endpoint.
      *
+     * @noinspection MissingParameterTypeDeclarationInspection
      */
-    public function id(int $id): Fluent
+    public function id($id): Fluent
     {
         $this->segments[] = $id;
 
