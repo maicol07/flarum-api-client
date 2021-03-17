@@ -34,7 +34,7 @@
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6|^7",
+        "guzzlehttp/guzzle": "^7",
         "illuminate/cache": "^6|^8",
         "illuminate/support": "^6|^8"
     },
