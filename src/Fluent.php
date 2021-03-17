@@ -200,7 +200,7 @@ class Fluent
      * @return $this
      * @noinspection MissingParameterTypeDeclarationInspection
      */
-    protected function addQueryParameter(string $type, $value): Fluent
+    public function addQueryParameter(string $type, $value): Fluent
     {
         $this->query[$type] = $value;
 
