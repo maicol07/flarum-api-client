@@ -15,55 +15,55 @@ class DiscussionTest extends TestCase
      * @param array $filters
      * @return Collection
      */
-    public function frontpage($filters = []): Collection
+    public function frontpage(array $filters = []): Collection
     {
-        /** @var Collection $collection */
         $collection = $this->client->discussions()->filter($filters)->request();
-        
+
         self::assertInstanceOf(Collection::class, $collection);
-        
         self::assertGreaterThan(0, $collection->collect()->count());
-        
+
         return $collection;
     }
-    
+
     /**
      * @test
      */
     public function filter(): void
     {
         $this->frontpage([
-            'q' => env('DISCUSSION_FILTER') ?? 'tag:sandbox'
+            'tag' => env('DISCUSSION_TAG_FILTER', 'general')
         ]);
     }
-    
+
     /**
      * @test
      * @depends frontpage
      * @param Collection $collection
      */
-    public function discussion(Collection $collection): void
+    public function discussion(Collection $collection): Item
     {
-        /** @var Item $discussion */
         $discussion = $collection->collect()->first();
-        
-        /** @var Item $item */
+        self::assertInstanceOf(Item::class, $discussion);
+
         $item = $this->client->discussions()->id($discussion->id)->request();
-        
+        self::assertInstanceOf(Item::class, $item);
+
         self::assertEquals($discussion->id, $item->id, 'Requesting an existing discussion retrieves an incorrect result.');
         self::assertEquals($discussion->type, $item->type, 'Requesting an existing discussion retrieves an incorrect resource type.');
-        
+
         $cached = Client::getCache()->get($discussion->id, null, $discussion->type);
-        
+
         self::assertNotNull($cached, 'Discussion was not automatically persisted to global store.');
         self::assertEquals($discussion->id, $cached->id, 'The wrong discussion was stored into cache.');
-        
+
         self::assertNotNull($discussion->title);
         self::assertNotNull($discussion->slug);
-        
+
         self::assertNotNull($discussion->tags, 'The relation tags should be set on a discussion.');
-        
-        self::assertNotNull($discussion->startPost, 'A discussion has a start post.');
+
+        self::assertNotNull($discussion->firstPost, 'A discussion has a start post.');
+
+        return $discussion;
     }
 
     /**
@@ -74,20 +74,20 @@ class DiscussionTest extends TestCase
         if (!$this->client->isAuthorized()) {
             self::markTestSkipped('No authentication set.');
         }
-    
+
         $discussion = new Discussion([
             'title' => 'Foo',
             'content' => 'Some testing content'
         ]);
-    
+
         $resource = $discussion->save();
-    
+
         self::assertInstanceOf(Item::class, $resource);
-    
+
         self::assertEquals($discussion->title, $resource->title);
-        self::assertNotEmpty($resource->startPost);
-        self::assertEquals($discussion->content, $resource->startPost->content);
-    
+        self::assertNotEmpty($resource->firstPost);
+        self::assertEquals($discussion->content, $resource->firstPost->content);
+
         return $resource;
     }
 
@@ -101,13 +101,13 @@ class DiscussionTest extends TestCase
         if (!$this->client->isAuthorized()) {
             self::markTestSkipped('No authentication set.');
         }
-    
+
         $discussion = Discussion::fromResource($resource);
         $model = Model::fromResource($resource);
-    
+
         // Resolve the same instance.
         self::assertEquals($discussion, $model);
-    
+
         // See if we can delete things.
         self::assertTrue($discussion->delete());
     }
