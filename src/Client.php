@@ -96,7 +96,7 @@ class Client
 
         if ($token) {
             $this->authorized = true;
-            Arr::set($headers, 'Authorization', "Token $token");
+            Arr::set($headers, 'Authorization', "Token $token; userId=1");
         }
 
         return $headers;
