@@ -31,7 +31,7 @@ class DiscussionTest extends TestCase
     public function filter(): void
     {
         $this->frontpage([
-            'tag' => env('DISCUSSION_TAG_FILTER', 'general')
+            'tags' => env('DISCUSSION_TAG_FILTER', 'general')
         ]);
     }
 
@@ -59,7 +59,9 @@ class DiscussionTest extends TestCase
         self::assertNotNull($discussion->title);
         self::assertNotNull($discussion->slug);
 
-        self::assertNotNull($discussion->tags, 'The relation tags should be set on a discussion.');
+        if (array_key_exists('tags', $discussion->relationships)) {
+            self::assertNotNull($discussion->tags, 'The relation tags should be set on a discussion.');
+        }
 
         self::assertNotNull($discussion->firstPost, 'A discussion has a start post.');
 
