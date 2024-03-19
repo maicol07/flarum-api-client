@@ -40,6 +40,10 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist
 
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '5' # wait 5 seconds before running tests (to avoid Flarum too-many-requests error)
+
       - name: Run tests
         run: composer test
         env:
