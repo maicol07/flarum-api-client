@@ -38,8 +38,8 @@ class Factory
         if (!empty($included)) {
             (new LaravelCollection($included))
                 ->groupBy('type')
-                ->each(function ($items) {
-                    (new Collection($items))->cache();
+                ->each(function (LaravelCollection $items) {
+                    (new Collection($items->all()))->cache();
                 });
         }
 
