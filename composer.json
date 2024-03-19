@@ -50,5 +50,8 @@
     "support": {
         "issues": "https://github.com/maicol07/flarum-api-client/issues",
         "source": "https://github.com/maicol07/flarum-api-client"
+    },
+    "scripts": {
+        "test": "phpunit --configuration phpunit.xml tests"
     }
 }
