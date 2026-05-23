@@ -58,9 +58,11 @@ class Client
 
         $options = $this->getVariablesForMethod();
 
-        $additional_headers = $this->fluent->getHeaders();
-        if (!empty($additional_headers)) {
-            $headers = array_merge($this->client->getConfig('headers'), $additional_headers);
+        $headers = array_merge(
+            $this->client->getConfig('headers') ?? [],
+            $this->fluent->getHeaders()
+        );
+        if (!empty($headers)) {
             $options = array_merge($options, ['headers' => $headers]);
         }
 

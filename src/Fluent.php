@@ -99,6 +99,7 @@ class Fluent
         $this->includes = [];
         $this->query = [];
         $this->variables = [];
+        $this->additional_headers = [];
         $this->method = 'get';
 
         return $this;
