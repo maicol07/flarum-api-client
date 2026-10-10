@@ -48,7 +48,7 @@ class Collection extends Resource
      * @param int|null $amount
      * @return Collect
      */
-    public function latest(string $by = 'created_at', int $amount = null): Collect
+    public function latest(string $by = 'created_at', ?int $amount = null): Collect
     {
         $set = $this->collect()->sortBy($by);
 

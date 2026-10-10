@@ -59,7 +59,7 @@ class Cache
      * @param string|null $store
      * @return Store
      */
-    public function getStore(string $store = null): Store
+    public function getStore(?string $store = null): Store
     {
         $store = $store ?? $this->active;
 
@@ -76,7 +76,7 @@ class Cache
      * @param string|null $type
      * @return Cache
      */
-    public function set(int $id, Item $item, string $type = null): Cache
+    public function set(int $id, Item $item, ?string $type = null): Cache
     {
         $this->getStore($type)->put($id, $item, $this->duration);
 
@@ -89,7 +89,7 @@ class Cache
      * @param string|null $type
      * @return mixed
      */
-    public function get(int $id, $default = null, string $type = null)
+    public function get(int $id, $default = null, ?string $type = null)
     {
         $value = $this->getStore($type)->get($id);
 
@@ -100,7 +100,7 @@ class Cache
      * @param string|null $type
      * @return mixed
      */
-    public function all(string $type = null)
+    public function all(?string $type = null)
     {
         /** @noinspection PhpUndefinedMethodInspection */
         return $this->getStore($type)->all();
