@@ -42,7 +42,8 @@
         "phpunit/phpunit": "^9",
         "roave/security-advisories": "dev-latest",
         "vlucas/phpdotenv": "^5",
-        "phpoption/phpoption": "^1"
+        "phpoption/phpoption": "^1",
+        "rector/rector": "^2.7"
     },
     "suggest": {
         "vlucas/phpdotenv": "Required for running tests with Laravel 6 (^3.3) or Laravel 7 (^4). If you use Laravel 8 this package is already installed"
