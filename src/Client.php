@@ -58,16 +58,14 @@ class Client
 
         $options = $this->getVariablesForMethod();
 
-        $headers = array_merge(
-            $this->client->getConfig('headers') ?? [],
-            $this->fluent->getHeaders()
-        );
+        // Guzzle merges the client default headers into these.
+        $headers = $this->fluent->getHeaders();
         if (!empty($headers)) {
             $options = array_merge($options, ['headers' => $headers]);
         }
 
         try {
-            $response = $this->client->{$method}((string)$this->fluent, $options);
+            $response = $this->client->request(strtoupper($method), (string)$this->fluent, $options);
             assert($response instanceof ResponseInterface);
         } finally {
             // Reset the fluent builder for a new request.
