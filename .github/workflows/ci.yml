@@ -31,8 +31,15 @@ jobs:
       FLARUM_USERNAME: ${{ secrets.FLARUM_USERNAME }}
       FLARUM_PASSWORD: ${{ secrets.FLARUM_PASSWORD }}
 
+  # Quality
+  rector:
+    uses: maicol07/actions/.github/workflows/php.yml@v1
+    with:
+      php_version: '8.5'
+      run: vendor/bin/rector process --dry-run --no-progress-bar
+
   release:
-    needs: [security, tests]
+    needs: [security, tests, rector]
     if: github.event_name == 'push'
     uses: maicol07/actions/.github/workflows/release.yml@v1
     permissions:
