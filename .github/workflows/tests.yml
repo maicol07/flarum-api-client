@@ -1,5 +1,15 @@
+name: Tests
+# Called by ci.yml: a PHP matrix against a live Flarum instance (FLARUM_USERNAME/PASSWORD).
 on:
-  push:
+  workflow_call:
+    secrets:
+      FLARUM_USERNAME:
+        required: true
+      FLARUM_PASSWORD:
+        required: true
+
+permissions:
+  contents: read
 
 jobs:
   tests:

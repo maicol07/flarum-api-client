@@ -1,0 +1,43 @@
+name: CI
+# Shared pipeline of maicol07/actions: checks on PRs and main, then on main the release PR and,
+# once it is merged, the GitHub Release (Packagist updates through its webhook). A job is
+# overridden by replacing its `uses:` with its own (same job name, so `needs` keeps working).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  # Never cancel a release half done on main.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    uses: maicol07/actions/.github/workflows/security.yml@v1
+
+  commit_lint:
+    uses: maicol07/actions/.github/workflows/commit-lint.yml@v1
+
+  # Own workflow: a PHP version matrix against a live Flarum, which php.yml does not cover.
+  tests:
+    uses: ./.github/workflows/tests.yml
+    secrets:
+      FLARUM_USERNAME: ${{ secrets.FLARUM_USERNAME }}
+      FLARUM_PASSWORD: ${{ secrets.FLARUM_PASSWORD }}
+
+  release:
+    needs: [security, tests]
+    if: github.event_name == 'push'
+    uses: maicol07/actions/.github/workflows/release.yml@v1
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      # The older 2-part tags (1.4, 1.5...) keep their changelog section.
+      tag_pattern: '^[0-9]+\.[0-9]+(\.[0-9]+)?$'
