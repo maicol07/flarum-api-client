@@ -19,13 +19,18 @@ permissions:
 
 jobs:
   security:
-    uses: maicol07/actions/.github/workflows/security.yml@v1
+    uses: maicol07/actions/.github/workflows/security.yml@v2
 
   commit_lint:
-    uses: maicol07/actions/.github/workflows/commit-lint.yml@v1
+    uses: maicol07/actions/.github/workflows/commit-lint.yml@v2
 
   # Own workflow: a PHP version matrix against a live Flarum, which php.yml does not cover.
   tests:
+    # Not on the release PR nor on its merge, like the shared checks of maicol07/actions@v2.
+    if: &checks >-
+      github.head_ref != 'release/next' && !(github.event_name == 'push' && (
+        startsWith(github.event.head_commit.message, 'chore(release):') ||
+        (startsWith(github.event.head_commit.message, 'Merge pull request') && contains(github.event.head_commit.message, '/release/next'))))
     uses: ./.github/workflows/tests.yml
     secrets:
       FLARUM_USERNAME: ${{ secrets.FLARUM_USERNAME }}
@@ -33,15 +38,15 @@ jobs:
 
   # Quality
   rector:
-    uses: maicol07/actions/.github/workflows/php.yml@v1
+    uses: maicol07/actions/.github/workflows/php.yml@v2
     with:
       php_version: '8.5'
       run: vendor/bin/rector process --dry-run --no-progress-bar
 
   release:
     needs: [security, tests, rector]
-    if: github.event_name == 'push'
-    uses: maicol07/actions/.github/workflows/release.yml@v1
+    if: github.event_name == 'push' && !failure() && !cancelled()
+    uses: maicol07/actions/.github/workflows/release.yml@v2
     permissions:
       contents: write
       pull-requests: write
